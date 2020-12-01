@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.moviedbapp.R
-import com.example.moviedbapp.databinding.UpcomingMovieBinding
-import com.example.moviedbapp.model.MovieResult
+import com.example.moviedbapp.databinding.NowplayingBinding
+import com.example.moviedbapp.model.NowPlayingResult
 
-
-class MovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapter<MovieResult, MovieAdapter.MovieViewHolder>(COMPARATOR) {
+class NowPlayingMovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapter<NowPlayingResult, NowPlayingMovieAdapter.MovieViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val binding = UpcomingMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = NowplayingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(binding)
     }
 
@@ -26,7 +25,7 @@ class MovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapt
         }
     }
 
-    inner class MovieViewHolder(private val binding: UpcomingMovieBinding) :
+    inner class MovieViewHolder(private val binding: NowplayingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -41,29 +40,29 @@ class MovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapt
             }
         }
 
-        fun bind(movie: MovieResult) {
+        fun bind(nowPlayingResult: NowPlayingResult) {
             with(binding) {
                 Glide.with(itemView)
-                    .load("${movie.baseUrl}${movie.posterPath}")
+                    .load("${nowPlayingResult.baseUrl}${nowPlayingResult.posterPath}")
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(imageView)
-                title.text = movie.originalTitle
+                title.text = nowPlayingResult.originalTitle
             }
         }
     }
 
     interface OnItemClickListener{
-        fun onItemClick(movie: MovieResult)
+        fun onItemClick(nowPlayingResult: NowPlayingResult)
     }
 
     companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<MovieResult>() {
-            override fun areItemsTheSame(oldItem: MovieResult, newItem: MovieResult): Boolean =
+        private val COMPARATOR = object : DiffUtil.ItemCallback<NowPlayingResult>() {
+            override fun areItemsTheSame(oldItem: NowPlayingResult, newItem: NowPlayingResult): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: MovieResult, newItem: MovieResult): Boolean =
+            override fun areContentsTheSame(oldItem: NowPlayingResult, newItem: NowPlayingResult): Boolean =
                 oldItem == newItem
         }
     }

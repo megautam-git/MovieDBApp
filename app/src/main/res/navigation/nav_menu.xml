@@ -9,10 +9,52 @@
         android:id="@+id/movieHome"
         android:name="com.example.moviedbapp.ui.MovieHome"
         android:label="movie_home_fragment"
-        tools:layout="@layout/movie_home_fragment" />
+        tools:layout="@layout/movie_home_fragment" >
+        <action
+            android:id="@+id/action_movieHome_to_movieDetail"
+            app:destination="@id/movieDetail" />
+        <action
+            android:id="@+id/action_movieHome_to_upcomingMovie"
+            app:destination="@id/upcomingMovie" />
+        <action
+            android:id="@+id/action_movieHome_to_popularMovie"
+            app:destination="@id/popularMovie" />
+        <action
+            android:id="@+id/action_movieHome_to_nowPlayingMovie"
+            app:destination="@id/nowPlayingMovie" />
+    </fragment>
     <fragment
         android:id="@+id/savedMovie"
         android:name="com.example.moviedbapp.ui.SavedMovie"
         android:label="fragment_saved_movie"
         tools:layout="@layout/fragment_saved_movie" />
+    <fragment
+        android:id="@+id/movieDetail"
+        android:name="com.example.moviedbapp.ui.MovieDetail"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" />
+    <fragment
+        android:id="@+id/nowPlayingMovie"
+        android:name="com.example.moviedbapp.ui.NowPlayingMovie"
+        android:label="NowPlayingMovie" >
+        <action
+            android:id="@+id/action_nowPlayingMovie_to_movieDetail"
+            app:destination="@id/movieDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/popularMovie"
+        android:name="com.example.moviedbapp.ui.PopularMovie"
+        android:label="PopularMovie" >
+        <action
+            android:id="@+id/action_popularMovie_to_movieDetail"
+            app:destination="@id/movieDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/upcomingMovie"
+        android:name="com.example.moviedbapp.ui.UpcomingMovie"
+        android:label="UpcomingMovie" >
+        <action
+            android:id="@+id/action_upcomingMovie_to_movieDetail"
+            app:destination="@id/movieDetail" />
+    </fragment>
 </navigation>

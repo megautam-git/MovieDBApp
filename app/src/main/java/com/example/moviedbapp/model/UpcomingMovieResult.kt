@@ -3,7 +3,7 @@ package com.example.moviedbapp.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieResult(
+data class UpcomingMovieResult(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")

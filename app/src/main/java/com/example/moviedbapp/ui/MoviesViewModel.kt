@@ -18,15 +18,35 @@ class MoviesViewModel @ViewModelInject constructor(private val repository: Movie
     }
 
     private val currentQuery = state.getLiveData(CURRENT_QUERY, EMPTY_QUERY)
-    val movies = currentQuery.switchMap { query ->
+    val upcomingmovies = currentQuery.switchMap { query ->
         if (!query.isEmpty()){
-            repository.getSearchMovies(query)
+            repository.searchUpcomingMovies(query)
         }else{
             repository.getUpcomingMovies().cachedIn(viewModelScope)
         }
     }
+    val nowplayingmovies = currentQuery.switchMap { query ->
+        if (!query.isEmpty()){
+            repository.searchNowPlayingMovies(query)
+        }else{
+            repository.getNowPlyingMovies().cachedIn(viewModelScope)
+        }
+    }
+    val popularmovies = currentQuery.switchMap { query ->
+        if (!query.isEmpty()){
+            repository.searchPopularMovies(query)
+        }else{
+            repository.getPopularMovies().cachedIn(viewModelScope)
+        }
+    }
 
-    fun searchMovies(query: String){
+    fun searchUpcomingMovies(query: String){
+        currentQuery.value = query
+    }
+    fun searchPopularMovies(query: String){
+        currentQuery.value = query
+    }
+    fun searchNowplayingMovies(query: String){
         currentQuery.value = query
     }
 }

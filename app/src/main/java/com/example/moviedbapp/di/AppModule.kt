@@ -39,6 +39,7 @@ object AppModule {
         okHttpClient.build()
         return okHttpClient.build()
     }
+
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit=
