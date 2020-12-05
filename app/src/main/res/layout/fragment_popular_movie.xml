@@ -24,7 +24,7 @@
         android:id="@+id/tv_failed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_try_again"
+        android:layout_above="@id/btnTryAgain"
         android:layout_centerHorizontal="true"
         android:text="Data gagal dimuat"
         android:visibility="gone"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/popularmovieview"
+        app:layout_constraintTop_toTopOf="@+id/popular"
         app:layout_constraintVertical_bias="0.926"
         tools:visibility="visible" />
 
@@ -63,7 +63,7 @@
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/btn_try_again"
+        android:id="@+id/btnTryAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

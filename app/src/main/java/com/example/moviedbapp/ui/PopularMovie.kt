@@ -17,10 +17,9 @@ import com.example.moviedbapp.adapter.PopularMovieAdapter
 import com.example.moviedbapp.databinding.FragmentPopularMovieBinding
 import com.example.moviedbapp.model.PopularResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.movie_home_fragment.*
 
 @AndroidEntryPoint
-class PopularMovie : Fragment(R.layout.popular)  , PopularMovieAdapter.OnItemClickListener{
+class PopularMovie : Fragment(R.layout.fragment_popular_movie)  , PopularMovieAdapter.OnItemClickListener{
 
     private val viewModel by viewModels<MoviesViewModel>()
     private lateinit var _binding: FragmentPopularMovieBinding
@@ -34,8 +33,8 @@ class PopularMovie : Fragment(R.layout.popular)  , PopularMovieAdapter.OnItemCli
         val adapter = PopularMovieAdapter(this)
 
         binding.apply {
-            popularMovieView.setHasFixedSize(true)
-            popularMovieView.adapter = adapter.withLoadStateHeaderAndFooter(
+            popular.setHasFixedSize(true)
+            popular.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = MovieLoadStateAdapter {adapter.retry()},
                 footer = MovieLoadStateAdapter {adapter.retry()}
             )
@@ -51,7 +50,7 @@ class PopularMovie : Fragment(R.layout.popular)  , PopularMovieAdapter.OnItemCli
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-                popularMovieView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                popular.isVisible = loadState.source.refresh is LoadState.NotLoading
                 btnTryAgain.isVisible =loadState.source.refresh is LoadState.Error
                 tvFailed.isVisible = loadState.source.refresh is LoadState.Error
 
@@ -59,7 +58,7 @@ class PopularMovie : Fragment(R.layout.popular)  , PopularMovieAdapter.OnItemCli
                 if (loadState.source.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
                     adapter.itemCount < 1){
-                    popularMovieView.isVisible = false
+                    popular.isVisible = false
                     tvNotFound.isVisible = true
                 } else {
                     tvNotFound.isVisible = false
