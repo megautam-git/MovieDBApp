@@ -1,4 +1,4 @@
-package com.example.moviedbapp.ui
+package com.example.moviedbapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.example.moviedbapp.R
 import com.example.moviedbapp.databinding.PopularBinding
 import com.example.moviedbapp.model.PopularResult
 
-class PopularMovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapter<PopularResult,PopularMovieAdapter.MovieViewHolder>(COMPARATOR) {
+class PopularMovieAdapter(private val listener : OnItemClickListener) : PagingDataAdapter<PopularResult, PopularMovieAdapter.MovieViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = PopularBinding.inflate(LayoutInflater.from(parent.context), parent, false)

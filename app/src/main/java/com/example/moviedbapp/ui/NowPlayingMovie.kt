@@ -12,12 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.moviedbapp.R
+import com.example.moviedbapp.adapter.MovieLoadStateAdapter
+import com.example.moviedbapp.adapter.NowPlayingMovieAdapter
 import com.example.moviedbapp.databinding.FragmentNowPlayingMovieBinding
 import com.example.moviedbapp.model.NowPlayingResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NowPlayingMovie : Fragment(R.layout.fragment_now_playing_movie) ,NowPlayingMovieAdapter.OnItemClickListener{
+class NowPlayingMovie() : Fragment(R.layout.fragment_now_playing_movie) , NowPlayingMovieAdapter.OnItemClickListener{
 
     private val viewModel by viewModels<MoviesViewModel>()
     private lateinit var _binding:FragmentNowPlayingMovieBinding
@@ -28,7 +30,7 @@ class NowPlayingMovie : Fragment(R.layout.fragment_now_playing_movie) ,NowPlayin
 
         _binding = FragmentNowPlayingMovieBinding.bind(view)
 
-        val adapter =NowPlayingMovieAdapter(this)
+        val adapter = NowPlayingMovieAdapter(this)
 
         binding.apply {
             nowPlaying.setHasFixedSize(true)

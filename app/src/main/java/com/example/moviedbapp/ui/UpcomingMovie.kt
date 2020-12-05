@@ -12,13 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.moviedbapp.R
+import com.example.moviedbapp.adapter.MovieLoadStateAdapter
+import com.example.moviedbapp.adapter.UpcomingMovieAdapter
 import com.example.moviedbapp.databinding.FragmentUpcomingMovieBinding
 import com.example.moviedbapp.model.UpcomingMovieResult
 import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
 @AndroidEntryPoint
-class UpcomingMovie : Fragment(R.layout.fragment_upcoming_movie) ,UpcomingMovieAdapter.OnItemClickListener{
+class UpcomingMovie : Fragment(R.layout.fragment_upcoming_movie) , UpcomingMovieAdapter.OnItemClickListener{
 
     private val viewModel by viewModels<MoviesViewModel>()
     private lateinit var _binding:FragmentUpcomingMovieBinding

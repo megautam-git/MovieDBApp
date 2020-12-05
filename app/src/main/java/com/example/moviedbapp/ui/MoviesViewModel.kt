@@ -6,10 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.example.moviedbapp.data.local.FavMovieRepo
+import com.example.moviedbapp.model.FavoriteMovie
 import com.example.moviedbapp.repositories.MovieRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MoviesViewModel @ViewModelInject constructor(private val repository: MovieRepository,
-    @androidx.hilt.Assisted state: SavedStateHandle
+    @androidx.hilt.Assisted state: SavedStateHandle,private val favMovieRepo: FavMovieRepo
 ) : ViewModel(){
 
     companion object{
@@ -48,5 +53,10 @@ class MoviesViewModel @ViewModelInject constructor(private val repository: Movie
     }
     fun searchNowplayingMovies(query: String){
         currentQuery.value = query
+    }
+
+
+    suspend fun addToSavedMovie(favoriteMovie: FavoriteMovie)= CoroutineScope(Dispatchers.IO).launch {
+        favMovieRepo.addToFavoriteMovie(favoriteMovie)
     }
 }

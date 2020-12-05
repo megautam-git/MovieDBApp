@@ -12,13 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.moviedbapp.R
+import com.example.moviedbapp.adapter.MovieLoadStateAdapter
+import com.example.moviedbapp.adapter.PopularMovieAdapter
 import com.example.moviedbapp.databinding.FragmentPopularMovieBinding
 import com.example.moviedbapp.model.PopularResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.movie_home_fragment.*
 
 @AndroidEntryPoint
-class PopularMovie : Fragment(R.layout.popular)  ,PopularMovieAdapter.OnItemClickListener{
+class PopularMovie : Fragment(R.layout.popular)  , PopularMovieAdapter.OnItemClickListener{
 
     private val viewModel by viewModels<MoviesViewModel>()
     private lateinit var _binding: FragmentPopularMovieBinding

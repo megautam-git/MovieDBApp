@@ -27,7 +27,11 @@
         android:id="@+id/savedMovie"
         android:name="com.example.moviedbapp.ui.SavedMovie"
         android:label="fragment_saved_movie"
-        tools:layout="@layout/fragment_saved_movie" />
+        tools:layout="@layout/fragment_saved_movie" >
+        <action
+            android:id="@+id/action_savedMovie_to_movieDetail"
+            app:destination="@id/movieDetail" />
+    </fragment>
     <fragment
         android:id="@+id/movieDetail"
         android:name="com.example.moviedbapp.ui.MovieDetail"

@@ -1,5 +1,6 @@
 package com.example.moviedbapp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.moviedbapp.R
+import com.example.moviedbapp.adapter.MovieLoadStateAdapter
+import com.example.moviedbapp.adapter.NowPlayingMovieAdapter
+import com.example.moviedbapp.adapter.PopularMovieAdapter
+import com.example.moviedbapp.adapter.UpcomingMovieAdapter
 import com.example.moviedbapp.databinding.MovieHomeFragmentBinding
 import com.example.moviedbapp.model.NowPlayingResult
 import com.example.moviedbapp.model.PopularResult
@@ -19,8 +24,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.movie_home_fragment.*
 
 @AndroidEntryPoint
-class MovieHome : Fragment(R.layout.movie_home_fragment) ,UpcomingMovieAdapter.OnItemClickListener,NowPlayingMovieAdapter.OnItemClickListener
-,PopularMovieAdapter.OnItemClickListener,View.OnClickListener{
+@SuppressLint("ValidFragment")
+class MovieHome : Fragment(R.layout.movie_home_fragment) , UpcomingMovieAdapter.OnItemClickListener, NowPlayingMovieAdapter.OnItemClickListener
+, PopularMovieAdapter.OnItemClickListener,View.OnClickListener{
 
         private val viewModel by viewModels<MoviesViewModel>()
         private lateinit var _binding:MovieHomeFragmentBinding

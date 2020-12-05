@@ -9,15 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.moviedbapp.R
+import com.example.moviedbapp.adapter.TrailerAdapter
+import com.example.moviedbapp.model.FavoriteMovie
 import com.example.moviedbapp.model.TrailerResult
 import com.example.moviedbapp.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MovieDetail : Fragment(R.layout.fragment_movie_detail),TrailerAdapter.RecyclerViewClickListener {
+class MovieDetail : Fragment(R.layout.fragment_movie_detail), TrailerAdapter.RecyclerViewClickListener {
 
     private val viewModel by viewModels<TrailerViewModel>()
+    private val favviewModel by viewModels<MoviesViewModel>()
     private lateinit var trailerAdapter: TrailerAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +52,7 @@ class MovieDetail : Fragment(R.layout.fragment_movie_detail),TrailerAdapter.Recy
                      setHasFixedSize(true)
                      trailerAdapter= TrailerAdapter(it,this@MovieDetail)
                      adapter=trailerAdapter
+
                  }
              }
          }
@@ -57,6 +64,21 @@ class MovieDetail : Fragment(R.layout.fragment_movie_detail),TrailerAdapter.Recy
         language.text=mlanguage
         overview.text=moverview
         setUpView()
+        favourite.setOnClickListener(View.OnClickListener {
+            val favoriteMovie=FavoriteMovie()
+            favoriteMovie.id=id
+            favoriteMovie.title=mtitle
+            favoriteMovie.releaseDate=mreleasedate
+            favoriteMovie.backdropPath=mainposterbk
+            favoriteMovie.posterPath=posterbk
+            favoriteMovie.popularity=mpopularity
+            favoriteMovie.overview=moverview
+            favoriteMovie.originalLanguage=mlanguage
+            CoroutineScope(Dispatchers.IO).launch {
+                favviewModel.addToSavedMovie(favoriteMovie)
+            }
+
+        })
 
 
     }
@@ -73,6 +95,7 @@ class MovieDetail : Fragment(R.layout.fragment_movie_detail),TrailerAdapter.Recy
     //getYoutubeVideoUri(trailer.source)
     startActivity(intent)
 }
+
 
 
 

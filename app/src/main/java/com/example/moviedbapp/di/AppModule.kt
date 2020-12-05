@@ -1,10 +1,14 @@
 package com.example.moviedbapp.di
 
+import android.content.Context
+import androidx.room.Room
+import com.example.moviedbapp.data.local.FavoriteMovieDB
 import com.example.moviedbapp.data.network.MovieApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,16 +21,31 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
+@Singleton
+@Provides
+    fun setRoomDb(@ApplicationContext app:Context)= Room.databaseBuilder(
+        app,
+        FavoriteMovieDB::class.java,
+        "movie_db"
+        ).build()
+
+
+
+    @Singleton
+    @Provides
+    fun getRoomDB(db:FavoriteMovieDB)=db.getFavoriteMovieDao()
+
+
 
     @Provides
+    @Singleton
     fun providesLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
 
-
-
     @Provides
+    @Singleton
     fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
 
         val okHttpClient = OkHttpClient().newBuilder()
