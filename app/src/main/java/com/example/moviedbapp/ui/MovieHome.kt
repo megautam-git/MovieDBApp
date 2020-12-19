@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -38,7 +39,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment) , UpcomingMovieAdapter.
               nowplaying_id.setOnClickListener(this)
               popular_id.setOnClickListener(this)
             _binding = MovieHomeFragmentBinding.bind(view)
-
+            (activity as AppCompatActivity).supportActionBar?.title = "Movie DB"
             val adapter = UpcomingMovieAdapter(this)
             val adapter1 = NowPlayingMovieAdapter(this)
             val adapter2 = PopularMovieAdapter(this)

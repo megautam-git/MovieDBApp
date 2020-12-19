@@ -21,17 +21,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/popular_id"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:padding="2dp"
-                android:text="view all"
-                android:textAlignment="textEnd"
-                android:textColor="#000"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ptitle"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.50"
+                    android:padding="2dp"
+                    android:text="Popular"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/popular_id"
+                    android:layout_weight="0.50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="2dp"
+                    android:text="view all"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popularMovieView"
@@ -60,17 +78,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/nowplaying_id"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:padding="2dp"
-                android:text="view all"
-                android:textAlignment="textEnd"
-                android:textColor="#000"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/pnow"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.50"
+                    android:padding="2dp"
+                    android:text="Now Playing"
+                    android:textAlignment="textStart"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/nowplaying_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="2dp"
+                    android:text="view all"
+                    android:layout_weight="0.50"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/nowplayingview"
@@ -99,17 +135,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/upcoming_id"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:padding="2dp"
-                android:text="view all"
-                android:textAlignment="textEnd"
-                android:textColor="#000"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ppopular"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.50"
+                    android:padding="2dp"
+                    android:text="Upcoming"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/upcoming_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.50"
+                    android:padding="2dp"
+                    android:text="view all"
+                    android:textAlignment="textEnd"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcomingmovieview"
