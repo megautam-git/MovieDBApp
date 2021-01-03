@@ -19,7 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        /*buildConfigField("String","MOVIEDB_API_KEY",moviedb_api_key)*/
+        buildConfigField("String","MOVIE_API_KEY",movie_api_key)
 
     }
 

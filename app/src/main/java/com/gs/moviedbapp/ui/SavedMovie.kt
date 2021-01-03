@@ -39,6 +39,7 @@ private lateinit var madapter:FavoriteAdapter
                 madapter= FavoriteAdapter(it,this@SavedMovie)
                  adapter=madapter
                  swipeToDelete(savedMovie)
+
             }
         }
 
