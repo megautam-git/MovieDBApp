@@ -26,6 +26,8 @@ class MovieDetail : Fragment(R.layout.fragment_movie_detail), TrailerAdapter.Rec
     private val favviewModel by viewModels<MoviesViewModel>()
     private lateinit var trailerAdapter: TrailerAdapter
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,7 +41,7 @@ class MovieDetail : Fragment(R.layout.fragment_movie_detail), TrailerAdapter.Rec
                 .load("${Constants.IMG_BASE_URL}${posterbk}")
                 .error(R.drawable.ic_error)
                 .into(poster)
-        val id=arguments?.getInt("id",0)
+        val id=arguments?.getInt("id", 0)
         val mtitle=arguments?.getString("title")
         val mreleasedate=arguments?.getString("releasedate")
         val mpopularity=arguments?.getDouble("popularity")
@@ -50,13 +52,23 @@ class MovieDetail : Fragment(R.layout.fragment_movie_detail), TrailerAdapter.Rec
              viewModel.videoDetails.observe(viewLifecycleOwner) {
                  trailer.apply {
                      setHasFixedSize(true)
-                     trailerAdapter= TrailerAdapter(it,this@MovieDetail)
+                     trailerAdapter= TrailerAdapter(it, this@MovieDetail)
                      adapter=trailerAdapter
 
                  }
              }
          }
         (activity as AppCompatActivity).supportActionBar?.title = mtitle
+
+        requireActivity().window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+               or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or View.STATUS_BAR_HIDDEN
+                )
+        //(activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         title.text=mtitle
         releasedate.text=mreleasedate
@@ -65,15 +77,15 @@ class MovieDetail : Fragment(R.layout.fragment_movie_detail), TrailerAdapter.Rec
         overview.text=moverview
         setUpView()
         favourite.setOnClickListener(View.OnClickListener {
-            val favoriteMovie=FavoriteMovie()
-            favoriteMovie.id=id
-            favoriteMovie.title=mtitle
-            favoriteMovie.releaseDate=mreleasedate
-            favoriteMovie.backdropPath=mainposterbk
-            favoriteMovie.posterPath=posterbk
-            favoriteMovie.popularity=mpopularity
-            favoriteMovie.overview=moverview
-            favoriteMovie.originalLanguage=mlanguage
+            val favoriteMovie = FavoriteMovie()
+            favoriteMovie.id = id
+            favoriteMovie.title = mtitle
+            favoriteMovie.releaseDate = mreleasedate
+            favoriteMovie.backdropPath = mainposterbk
+            favoriteMovie.posterPath = posterbk
+            favoriteMovie.popularity = mpopularity
+            favoriteMovie.overview = moverview
+            favoriteMovie.originalLanguage = mlanguage
             CoroutineScope(Dispatchers.IO).launch {
                 favviewModel.addToSavedMovie(favoriteMovie)
             }
