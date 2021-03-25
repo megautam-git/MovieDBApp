@@ -70,6 +70,8 @@ class NowPlayingMovie() : Fragment(R.layout.fragment_now_playing_movie) , NowPla
     }
 
     override fun onItemClick(nowPlayingResult: NowPlayingResult) {
+        viewModel.getGenreById(nowPlayingResult.id)
+
         val bundle= bundleOf(
                 "id" to nowPlayingResult.id,
                 "title" to nowPlayingResult.title,

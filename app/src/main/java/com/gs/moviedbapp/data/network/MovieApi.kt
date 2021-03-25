@@ -3,10 +3,7 @@ package com.gs.moviedbapp.data.network
 
 
 import com.gs.moviedbapp.BuildConfig
-import com.gs.moviedbapp.model.NowPlayingMovieResponse
-import com.gs.moviedbapp.model.PopularMovieResponse
-import com.gs.moviedbapp.model.Trailers
-import com.gs.moviedbapp.model.UpcomingMovieResponse
+import com.gs.moviedbapp.model.*
 import com.gs.moviedbapp.util.Constants
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,6 +13,10 @@ interface MovieApi {
     companion object{
         const val BASE_URL = "https://api.themoviedb.org/3/"
     }
+
+    @GET("movie/{movie_id}/keywords?api_key=${BuildConfig.MOVIE_API_KEY}")
+    suspend fun getGenre(@Path("movie_id") id:Int):Genre
+
     //previous call =movie/now_playing?api_key=$API_KEY
     @GET("movie/now_playing?api_key=${BuildConfig.MOVIE_API_KEY}")
     suspend fun getNowPlayingMovies(

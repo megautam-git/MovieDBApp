@@ -21,7 +21,7 @@ class TrailerViewModel @ViewModelInject constructor(private val repository: Movi
         getVideoDetails()
     }*/
 
-    fun getVideoDetails(id:Int)=viewModelScope.launch{
+   suspend fun getVideoDetails(id:Int)=viewModelScope.launch{
         Log.d("getvideodetail", "getVideoDetails: its called")
         Log.d("trailerresult", "getVideoDetails: ${repository.getTrailers(id).trailerResults}")
         _videoDetails.value=repository.getTrailers(id).trailerResults

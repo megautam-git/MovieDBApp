@@ -1,16 +1,18 @@
 package com.gs.moviedbapp.ui
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.cachedIn
 import com.gs.moviedbapp.data.local.FavMovieRepo
 import com.gs.moviedbapp.model.FavoriteMovie
+import com.gs.moviedbapp.model.Genre
+import com.gs.moviedbapp.model.Keyword
 import com.gs.moviedbapp.repositories.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MoviesViewModel @ViewModelInject constructor(private val repository: MovieRepository,
@@ -21,7 +23,13 @@ class MoviesViewModel @ViewModelInject constructor(private val repository: Movie
         private const val CURRENT_QUERY = "current_query"
         private const val EMPTY_QUERY = ""
     }
+init {
+    getGenreById(52774)
 
+}
+    private val _genre=MutableLiveData<List<Keyword>>()
+    val genre:LiveData<List<Keyword>>
+        get()=_genre
     private val currentQuery = state.getLiveData(CURRENT_QUERY, EMPTY_QUERY)
     val upcomingmovies = currentQuery.switchMap { query ->
         if (!query.isEmpty()){
@@ -55,6 +63,10 @@ class MoviesViewModel @ViewModelInject constructor(private val repository: Movie
         currentQuery.value = query
     }
 
+    fun getGenreById(id:Int)=viewModelScope.launch(Dispatchers.Main) {
+        _genre.value=repository.getGenre(id).keywords
+        Log.d("genre data", "${_genre.value.toString()}")
+    }
 
     suspend fun addToSavedMovie(favoriteMovie: FavoriteMovie)= CoroutineScope(Dispatchers.IO).launch {
         favMovieRepo.addToFavoriteMovie(favoriteMovie)
