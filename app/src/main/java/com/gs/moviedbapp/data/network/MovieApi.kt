@@ -5,6 +5,7 @@ package com.gs.moviedbapp.data.network
 import com.gs.moviedbapp.BuildConfig
 import com.gs.moviedbapp.model.*
 import com.gs.moviedbapp.util.Constants
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -18,9 +19,10 @@ interface MovieApi {
     suspend fun getGenre(@Path("movie_id") id:Int):Genre
 
     //previous call =movie/now_playing?api_key=$API_KEY
+
     @GET("movie/now_playing?api_key=${BuildConfig.MOVIE_API_KEY}")
     suspend fun getNowPlayingMovies(
-        @Query("page") position: Int
+            @Query("page") position: Int
     ): NowPlayingMovieResponse
 
     @GET("movie/upcoming?api_key=${BuildConfig.MOVIE_API_KEY}")

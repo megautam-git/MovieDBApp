@@ -2,11 +2,16 @@ package com.gs.moviedbapp.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.gs.moviedbapp.adapter.NowPlayingMoviePaginSource
 import com.gs.moviedbapp.adapter.PopularMoviePagingSource
 import com.gs.moviedbapp.adapter.UpcomingMoviePagingSource
 import com.gs.moviedbapp.data.network.MovieApi
+import com.gs.moviedbapp.model.*
+import kotlinx.coroutines.flow.Flow
+
+
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,7 +26,10 @@ class MovieRepository @Inject constructor(private val movieApi: MovieApi) {
             ),
             pagingSourceFactory = { UpcomingMoviePagingSource(movieApi,null) }
         ).liveData
-    fun getPopularMovies() =
+
+
+
+    fun getPopularMovies()=
         Pager(
             config = PagingConfig(
                 pageSize = 5,
@@ -31,15 +39,18 @@ class MovieRepository @Inject constructor(private val movieApi: MovieApi) {
             pagingSourceFactory = { PopularMoviePagingSource(movieApi,null) }
         ).liveData
 
-    fun getNowPlyingMovies() =
-        Pager(
-            config = PagingConfig(
-                pageSize = 5,
-                maxSize = 20,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { NowPlayingMoviePaginSource(movieApi,null) }
+
+
+    fun getNowPlyingMovies()=
+            Pager(
+                config = PagingConfig(
+                        pageSize = 5,
+                        maxSize = 20,
+                        enablePlaceholders = false
+                ),
+                pagingSourceFactory = { NowPlayingMoviePaginSource(movieApi, null) }
         ).liveData
+
 
     fun searchUpcomingMovies(query: String) =
         Pager(
@@ -60,6 +71,7 @@ class MovieRepository @Inject constructor(private val movieApi: MovieApi) {
             ),
             pagingSourceFactory = {NowPlayingMoviePaginSource(movieApi,query)}
         ).liveData
+
     fun searchPopularMovies(query: String) =
         Pager(
             config = PagingConfig(

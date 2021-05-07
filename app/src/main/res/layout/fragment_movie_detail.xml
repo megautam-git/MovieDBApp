@@ -204,20 +204,5 @@
             app:layout_constraintVertical_bias="0.466"
             android:contentDescription="TODO" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="281dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/poster"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="hello" />
-        </com.google.android.material.chip.ChipGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
