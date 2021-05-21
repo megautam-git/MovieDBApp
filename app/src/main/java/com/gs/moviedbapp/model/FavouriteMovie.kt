@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 
 @Entity(tableName = "favorite_movie")
-data class FavoriteMovie(
+data class FavouriteMovie(
         @SerializedName("adult")
         var adult: Boolean?=false,
         @SerializedName("backdrop_path")

@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gs.moviedbapp.data.local.FavMovieRepo
-import com.gs.moviedbapp.model.FavoriteMovie
+import com.gs.moviedbapp.model.FavouriteMovie
 import kotlinx.coroutines.launch
 
 class SavedMovieViewModel @ViewModelInject constructor(private val favMovieRepo: FavMovieRepo):ViewModel() {
@@ -12,7 +12,7 @@ class SavedMovieViewModel @ViewModelInject constructor(private val favMovieRepo:
         favMovieRepo.deleteFavMovie(it)
     }
 
-    fun saveMoviedata(movieDetail: FavoriteMovie) =viewModelScope.launch {
+    fun saveMoviedata(movieDetail: FavouriteMovie) =viewModelScope.launch {
         favMovieRepo.addToFavoriteMovie(movieDetail)
     }
 

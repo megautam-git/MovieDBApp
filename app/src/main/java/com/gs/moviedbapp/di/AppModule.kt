@@ -2,7 +2,7 @@ package com.gs.moviedbapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.gs.moviedbapp.data.local.FavoriteMovieDB
+import com.gs.moviedbapp.data.local.FavouriteMovieDB
 import com.gs.moviedbapp.data.network.MovieApi
 import dagger.Module
 import dagger.Provides
@@ -25,7 +25,7 @@ object AppModule {
 @Provides
     fun setRoomDb(@ApplicationContext app:Context)= Room.databaseBuilder(
         app,
-        FavoriteMovieDB::class.java,
+        FavouriteMovieDB::class.java,
         "movie_db"
         ).build()
 
@@ -33,7 +33,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun getRoomDB(db:FavoriteMovieDB)=db.getFavoriteMovieDao()
+    fun getRoomDB(db:FavouriteMovieDB)=db.getFavouriteMovieDao()
 
 
 

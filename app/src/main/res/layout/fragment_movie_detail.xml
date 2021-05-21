@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight=".50"
@@ -56,21 +56,23 @@
 
                     android:textAlignment="center"
                     android:textColor="#8C8989"
-                    android:textSize="18sp" />
+                    android:textSize="18sp" />-->
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight=".50"
-                    android:fontFamily="@font/anton"
+                    android:fontFamily="@font/basic"
                     android:text="value"
-                    android:textAlignment="center"
+                    android:layout_marginStart="16dp"
+                    android:textAlignment="viewStart"
                     android:textColor="#040404"
-                    android:textSize="14sp" />
+                    android:textSize="22sp" />
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -78,9 +80,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50"
-                    android:text="popularity"
-                    android:textAlignment="center"
+                    android:layout_weight=".20"
+                    android:text="popularity:"
+                    android:fontFamily="@font/basic"
+                    android:textAlignment="viewStart"
+                    android:layout_marginStart="16dp"
                     android:textColor="#8C8989"
                     android:textSize="18sp" />
 
@@ -88,9 +92,10 @@
                     android:id="@+id/popularity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50"
+                    android:layout_weight=".10"
+                    android:fontFamily="@font/basic"
                     android:text="value"
-                    android:textAlignment="center"
+                    android:textAlignment="viewStart"
                     android:textColor="#8C8989"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -100,12 +105,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+               <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50"
-                    android:text="release date"
-                    android:textAlignment="center"
+                    android:layout_weight=".20"
+                   android:fontFamily="@font/basic"
+                    android:text="release date:"
+                   android:textAlignment="viewStart"
+                   android:layout_marginStart="16dp"
                     android:textColor="#8C8989"
                     android:textSize="18sp" />
 
@@ -113,9 +120,10 @@
                     android:id="@+id/releasedate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50"
+                    android:layout_weight=".10"
                     android:text="value"
-                    android:textAlignment="center"
+                    android:fontFamily="@font/basic"
+                    android:textAlignment="viewStart"
                     android:textColor="#8C8989"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -125,12 +133,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+               <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50"
-                    android:text="language"
-                    android:textAlignment="center"
+                    android:layout_weight=".20"
+                    android:text="language:"
+                   android:fontFamily="@font/basic"
+                   android:textAlignment="viewStart"
+                   android:layout_marginStart="16dp"
                     android:textColor="#8C8989"
                     android:textSize="18sp" />
 
@@ -138,14 +148,16 @@
                     android:id="@+id/language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50"
+                    android:layout_weight=".10"
                     android:text="value"
-                    android:textAlignment="center"
+                    android:fontFamily="@font/basic"
+                    android:textAlignment="viewStart"
                     android:textColor="#8C8989"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -153,9 +165,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/anton"
-                    android:text="overview"
-                    android:textAlignment="center"
+                    android:fontFamily="@font/basic"
+                    android:text="Overview"
+                    android:textAlignment="viewStart"
+                    android:layout_marginStart="16dp"
                     android:textColor="#050505"
                     android:textSize="18sp" />
 
@@ -164,17 +177,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="value"
-                    android:textAlignment="center"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/basic"
+                    android:layout_marginStart="16dp"
+                    android:textAlignment="viewStart"
                     android:textColor="#8C8989"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:textAlignment="viewStart"
+                          android:textSize="18sp"
+                          android:textColor="#050505"
+                          android:layout_marginStart="16dp"
+                          android:fontFamily="@font/basic"
+                          android:text="Watch Trailer"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -182,6 +208,8 @@
                         android:id="@+id/trailer"
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"

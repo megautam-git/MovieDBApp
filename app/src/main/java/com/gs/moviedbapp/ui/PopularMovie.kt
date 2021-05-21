@@ -17,6 +17,7 @@ import com.gs.moviedbapp.adapter.PopularMovieAdapter
 import com.gs.moviedbapp.databinding.FragmentPopularMovieBinding
 import com.gs.moviedbapp.model.PopularResult
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.movie_home_fragment.*
 
 @AndroidEntryPoint
 class PopularMovie : Fragment(R.layout.fragment_popular_movie)  , PopularMovieAdapter.OnItemClickListener{
@@ -78,6 +79,7 @@ class PopularMovie : Fragment(R.layout.fragment_popular_movie)  , PopularMovieAd
                 "posterpath" to popularResult.posterPath,
                 "overview" to popularResult.overview,
                 "popularity" to popularResult.popularity,
+            "vote" to popularResult.voteAverage,
                 "language" to popularResult.originalLanguage
         )
 

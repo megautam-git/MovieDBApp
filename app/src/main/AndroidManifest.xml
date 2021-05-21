@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gs.moviedbapp">
-<uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <supports-screens
         android:largeScreens="true"
         android:normalScreens="true"
-        android:xlargeScreens="true"
-        android:smallScreens="false"
         android:resizeable="true"
-        />
+        android:smallScreens="false"
+        android:xlargeScreens="true" />
+
     <application
+        android:name=".MovieApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/movie_icn_foreground"
         android:label="@string/app_name"
-        android:name="com.gs.moviedbapp.MovieApp"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/movie_icn_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieDBApp">
-        <activity android:name="com.gs.moviedbapp.MainActivity">
+        <activity android:name=".ui.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

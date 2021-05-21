@@ -11,19 +11,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.gs.moviedbapp.R
-import com.gs.moviedbapp.adapter.FavoriteAdapter
-import com.gs.moviedbapp.model.FavoriteMovie
+import com.gs.moviedbapp.adapter.FavouriteAdapter
 import com.gs.moviedbapp.util.RecyclerViewClickListener
 import com.gs.moviedbapp.util.SwipeToDelete
 import com.google.android.material.snackbar.Snackbar
+import com.gs.moviedbapp.model.FavouriteMovie
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import kotlinx.android.synthetic.main.fragment_saved_movie.*
 
 @AndroidEntryPoint
-class SavedMovie : Fragment(R.layout.fragment_saved_movie),FavoriteAdapter.OnItemClickCallback,RecyclerViewClickListener {
+class SavedMovie : Fragment(R.layout.fragment_saved_movie),FavouriteAdapter.OnItemClickCallback,RecyclerViewClickListener {
 
-private lateinit var madapter:FavoriteAdapter
+private lateinit var madapter:FavouriteAdapter
     private val viewModel by viewModels<SavedMovieViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ private lateinit var madapter:FavoriteAdapter
 
             savedMovie.apply {
                 setHasFixedSize(true)
-                madapter= FavoriteAdapter(it,this@SavedMovie)
+                madapter= FavouriteAdapter(it,this@SavedMovie)
                  adapter=madapter
                  swipeToDelete(savedMovie)
 
@@ -54,23 +54,23 @@ private lateinit var madapter:FavoriteAdapter
 
 
 
-    override fun onRecyclerViewItemClick(view: View, favoriteMovie: FavoriteMovie) {
+    override fun onRecyclerViewItemClick(view: View, favouriteMovie: FavouriteMovie) {
         val bundle= bundleOf(
-                "id" to favoriteMovie.id,
-                "title" to favoriteMovie.title,
-                "mainbackground" to favoriteMovie.backdropPath,
-                "releasedate" to favoriteMovie.releaseDate,
-                "posterpath" to favoriteMovie.posterPath,
-                "overview" to favoriteMovie.overview,
-                "popularity" to favoriteMovie.popularity,
-                "language" to favoriteMovie.originalLanguage
+                "id" to favouriteMovie.id,
+                "title" to favouriteMovie.title,
+                "mainbackground" to favouriteMovie.backdropPath,
+                "releasedate" to favouriteMovie.releaseDate,
+                "posterpath" to favouriteMovie.posterPath,
+                "overview" to favouriteMovie.overview,
+                "popularity" to favouriteMovie.popularity,
+                "language" to favouriteMovie.originalLanguage
         )
         //val action = FavoriteFragmentDirections.actionNavFavoriteToNavDetails(movie)
         Toast.makeText(requireContext(), "working", Toast.LENGTH_SHORT).show()
         findNavController().navigate(R.id.action_savedMovie_to_movieDetail,bundle)
     }
 
-    override fun onItemClick(favoriteMovie: FavoriteMovie) {
+    override fun onItemClick(favouriteMovie: FavouriteMovie) {
         Log.d("trail", "onItemClick: ")
     }
 
@@ -96,7 +96,7 @@ private lateinit var madapter:FavoriteAdapter
 
     private fun restoreData(
             view: View,
-            movieDetail: FavoriteMovie
+            movieDetail: FavouriteMovie
     ) {
         Snackbar.make(view, "Deleted ${movieDetail.title}", Snackbar.LENGTH_LONG).also {
             it.apply {

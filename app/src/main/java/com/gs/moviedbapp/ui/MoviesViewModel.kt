@@ -6,7 +6,7 @@ import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.gs.moviedbapp.data.local.FavMovieRepo
-import com.gs.moviedbapp.model.FavoriteMovie
+import com.gs.moviedbapp.model.FavouriteMovie
 import com.gs.moviedbapp.model.Genre
 import com.gs.moviedbapp.model.Keyword
 import com.gs.moviedbapp.repositories.MovieRepository
@@ -84,7 +84,7 @@ class MoviesViewModel @ViewModelInject constructor(private val repository: Movie
         Log.d("genre data", "${_genre.value.toString()}")
     }
 
-    suspend fun addToSavedMovie(favoriteMovie: FavoriteMovie) = CoroutineScope(Dispatchers.IO).launch {
+    suspend fun addToSavedMovie(favoriteMovie: FavouriteMovie) = CoroutineScope(Dispatchers.IO).launch {
         favMovieRepo.addToFavoriteMovie(favoriteMovie)
     }
 }

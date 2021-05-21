@@ -79,6 +79,7 @@ class UpcomingMovie : Fragment(R.layout.fragment_upcoming_movie) , UpcomingMovie
                 "posterpath" to upcomingMovie.posterPath,
                 "overview" to upcomingMovie.overview,
                 "popularity" to upcomingMovie.popularity,
+                "vote" to upcomingMovie.voteAverage,
                 "language" to upcomingMovie.originalLanguage
         )
 

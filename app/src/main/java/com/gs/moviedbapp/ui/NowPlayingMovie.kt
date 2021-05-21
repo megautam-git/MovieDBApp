@@ -80,6 +80,7 @@ class NowPlayingMovie() : Fragment(R.layout.fragment_now_playing_movie) , NowPla
                 "posterpath" to nowPlayingResult.posterPath,
                 "overview" to nowPlayingResult.overview,
                 "popularity" to nowPlayingResult.popularity,
+            "vote" to nowPlayingResult.voteAverage,
                 "language" to nowPlayingResult.originalLanguage
         )
 

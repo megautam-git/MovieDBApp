@@ -7,27 +7,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.gs.moviedbapp.R
-import com.gs.moviedbapp.model.FavoriteMovie
+import com.gs.moviedbapp.model.FavouriteMovie
 import com.gs.moviedbapp.util.RecyclerViewClickListener
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class FavoriteAdapter(val list:List<FavoriteMovie>, private val listener:RecyclerViewClickListener) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
+class FavouriteAdapter(val list:List<FavouriteMovie>, private val listener:RecyclerViewClickListener) : RecyclerView.Adapter<FavouriteAdapter.FavoriteViewHolder>() {
 
 
     interface OnItemClickCallback {
-        fun onItemClick(favoriteMovie: FavoriteMovie)
+        fun onItemClick(favourite: FavouriteMovie)
     }
 
    inner class FavoriteViewHolder(itemview: View) :RecyclerView.ViewHolder(itemview) {
-       fun bind(favoriteMovie: FavoriteMovie) {
+       fun bind(favourite: FavouriteMovie) {
 
            Glide.with(itemView.context)
-                   .load("${favoriteMovie.baseUrl}${favoriteMovie.posterPath}")
+                   .load("${favourite.baseUrl}${favourite.posterPath}")
                    .centerCrop()
                    .transition(DrawableTransitionOptions.withCrossFade())
                    .error(R.drawable.ic_error)
                    .into(itemView.imageView)
-           itemView.title.text = favoriteMovie.title
+           itemView.title.text = favourite.title
 
        }
    }
