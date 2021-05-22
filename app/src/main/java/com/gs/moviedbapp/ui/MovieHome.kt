@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -34,6 +37,7 @@ import com.gs.moviedbapp.model.UpcomingMovieResult
 import com.gs.moviedbapp.util.NetworkConnection
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.movie_home_fragment.*
+import kotlinx.android.synthetic.main.switch_layout.*
 
 
 @AndroidEntryPoint
@@ -343,5 +347,32 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu,inflater)
+
+        inflater.inflate(R.menu.main_menu, menu)
+        //val switchAB = menu?.findItem(R.id.switchId)
+
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.switchId->{
+                switchAB.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        Toast.makeText(context, "on", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "off", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                return true
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
 
 }

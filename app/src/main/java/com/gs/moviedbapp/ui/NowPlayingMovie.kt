@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -19,6 +20,7 @@ import com.gs.moviedbapp.model.NowPlayingResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+
 class NowPlayingMovie() : Fragment(R.layout.fragment_now_playing_movie) , NowPlayingMovieAdapter.OnItemClickListener{
 
     private val viewModel by viewModels<MoviesViewModel>()
@@ -27,7 +29,6 @@ class NowPlayingMovie() : Fragment(R.layout.fragment_now_playing_movie) , NowPla
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         _binding = FragmentNowPlayingMovieBinding.bind(view)
 
         val adapter = NowPlayingMovieAdapter(this)
@@ -111,7 +112,6 @@ class NowPlayingMovie() : Fragment(R.layout.fragment_now_playing_movie) , NowPla
 
         })
     }
-
 
 
 }

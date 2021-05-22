@@ -3,8 +3,8 @@
 buildscript {
     //ext.kotlin_version = "1.4.20"
     ext {
-        kotlinVersion = '1.4.20'
-        navigationVersion = '2.3.0'
+        kotlinVersion = '1.4.21'
+        navigationVersion = '2.3.5'
         hiltVersion = '2.28.3-alpha'
     }
     repositories {
@@ -12,7 +12,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
@@ -40,7 +40,7 @@ ext {
 */
     // App dependencies
     appCompatVersion = '1.2.0'
-    constraintLayoutVersion = '1.1.3'
+    constraintLayoutVersion = '2.0.4'
     espressoVersion = '3.2.0'
     glideVersion = '4.11.0'
     hiltAndroidXVersion = '1.0.0-alpha02'
