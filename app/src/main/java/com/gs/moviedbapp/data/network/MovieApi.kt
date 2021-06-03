@@ -15,6 +15,7 @@ interface MovieApi {
         const val BASE_URL = "https://api.themoviedb.org/3/"
     }
 
+
     @GET("movie/{movie_id}/keywords?api_key=${BuildConfig.MOVIE_API_KEY}")
     suspend fun getGenre(@Path("movie_id") id:Int):Genre
 

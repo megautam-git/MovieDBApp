@@ -41,15 +41,14 @@ import kotlinx.android.synthetic.main.switch_layout.*
 
 
 @AndroidEntryPoint
-@SuppressLint("ValidFragment")
 class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.OnItemClickListener,
     NowPlayingMovieAdapter.OnItemClickListener, PopularMovieAdapter.OnItemClickListener,
     View.OnClickListener {
-    private lateinit var adapter: UpcomingMovieAdapter
-    private lateinit var adapter1: NowPlayingMovieAdapter
-    private lateinit var adapter2: PopularMovieAdapter
+    private  var adapter: UpcomingMovieAdapter?=null
+    private  var adapter1: NowPlayingMovieAdapter?=null
+    private  var adapter2: PopularMovieAdapter?=null
     private val viewModel by viewModels<MoviesViewModel>()
-    private lateinit var _binding: MovieHomeFragmentBinding
+    private  var _binding: MovieHomeFragmentBinding?=null
     private val binding get() = _binding!!
     private var bacckpresstime: Long = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,24 +57,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
             object : OnBackPressedCallback(true) {
 
                 override fun handleOnBackPressed() {
-                   /* val mytoast =
-                        Toast.makeText(context, "press again to exit..", Toast.LENGTH_SHORT)
-                    //doubleBackToExitPressedOnce=true
-                    if (bacckpresstime + 2000 > System.currentTimeMillis()) {
-                        mytoast.cancel()
-                        Handler().postDelayed({
-                            requireActivity().finish()
-                        }, 1500)
 
-                        return
-                    } else {
-                        mytoast.show()
-                    }
-                    if (requireActivity().isFinishing) {
-                        mytoast.cancel()
-                    }
-                    //view?.let { Snackbar.make(it,"press again to exit",Snackbar.LENGTH_SHORT).show() }}
-                    bacckpresstime = System.currentTimeMillis()*/
                     val snackbar=Snackbar.make(view!!,"exit?",Snackbar.LENGTH_SHORT)
                     snackbar.setActionTextColor(Color.WHITE)
                     snackbar.setBackgroundTint(Color.BLACK)
@@ -85,16 +67,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                     })
                           snackbar.show()
 
-                    /* Handler().postDelayed({
-                            //  doubleBackToExitPressedOnce=false
 
-                             requireActivity().finish()
-
-                         }
-
-
-                         ,3000
-                     )*/
 
 
                 }
@@ -110,36 +83,9 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
         _binding = MovieHomeFragmentBinding.bind(view)
         (activity as AppCompatActivity).supportActionBar?.title = "Movie DB"
 
-        /* val wifi_service = context?.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activenetwork = wifi_service.activeNetworkInfo
-        if (activenetwork != null && activenetwork.isConnected) {
-            if (activenetwork.type == ConnectivityManager.TYPE_MOBILE) {
 
-                Toast.makeText(context, "connected to mobile", Toast.LENGTH_LONG).show()
-            }
-            if (activenetwork.type == ConnectivityManager.TYPE_WIFI) {
-                Toast.makeText(context, "connected  to wifi", Toast.LENGTH_LONG).show()
-            }
 
-        } else {
-            val snackBar = Snackbar.make(
-                view, "Replace with your own action",
-                Snackbar.LENGTH_LONG
-            ).setAction("Action", null)
-            snackBar.setActionTextColor(Color.BLUE)
-            val snackBarView = snackBar.view
-            snackBarView.setBackgroundColor(Color.CYAN)
-            val textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
-            textView.setTextColor(Color.BLUE)
-            textView.setOnClickListener(View.OnClickListener {
-                val intent = Intent(Intent.ACTION_MAIN)
-                intent.setClassName("com.android.phone", "com.android.phone.NetworkSetting")
-                startActivity(intent)
-            })
-            snackBar.show()
-        }*/
-
-        val networkConnection = context?.let { NetworkConnection(it) }
+        val networkConnection = requireContext().applicationContext?.let { NetworkConnection(it) }
         networkConnection!!.observe(viewLifecycleOwner, Observer { isConnected ->
             if (isConnected) {
                 myview.visibility = View.VISIBLE
@@ -149,19 +95,19 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
 
                 binding.apply {
                     upcomingmovieview.setHasFixedSize(true)
-                    upcomingmovieview.adapter = adapter.withLoadStateHeaderAndFooter(
-                        header = MovieLoadStateAdapter { adapter.retry() },
-                        footer = MovieLoadStateAdapter { adapter.retry() }
+                    upcomingmovieview.adapter = adapter!!.withLoadStateHeaderAndFooter(
+                        header = MovieLoadStateAdapter { adapter!!.retry() },
+                        footer = MovieLoadStateAdapter { adapter!!.retry() }
                     )
                     nowplayingview.setHasFixedSize(true)
-                    nowplayingview.adapter = adapter1.withLoadStateHeaderAndFooter(
-                        header = MovieLoadStateAdapter { adapter1.retry() },
-                        footer = MovieLoadStateAdapter { adapter1.retry() }
+                    nowplayingview.adapter = adapter1!!.withLoadStateHeaderAndFooter(
+                        header = MovieLoadStateAdapter { adapter1!!.retry() },
+                        footer = MovieLoadStateAdapter { adapter1!!.retry() }
                     )
                     popularMovieView.setHasFixedSize(true)
-                    popularMovieView.adapter = adapter2.withLoadStateHeaderAndFooter(
-                        header = MovieLoadStateAdapter { adapter2.retry() },
-                        footer = MovieLoadStateAdapter { adapter2.retry() }
+                    popularMovieView.adapter = adapter2!!.withLoadStateHeaderAndFooter(
+                        header = MovieLoadStateAdapter { adapter2!!.retry() },
+                        footer = MovieLoadStateAdapter { adapter2!!.retry() }
                     )
 
 
@@ -171,15 +117,15 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                 }
 
                 viewModel.upcomingmovies.observe(viewLifecycleOwner) {
-                    adapter.submitData(viewLifecycleOwner.lifecycle, it)
+                    adapter!!.submitData(viewLifecycleOwner.lifecycle, it)
                 }
                 viewModel.nowplayingmovies.observe(viewLifecycleOwner) {
-                    adapter1.submitData(viewLifecycleOwner.lifecycle, it)
+                    adapter1!!.submitData(viewLifecycleOwner.lifecycle, it)
                 }
                 viewModel.popularmovies.observe(viewLifecycleOwner) {
-                    adapter2.submitData(viewLifecycleOwner.lifecycle, it)
+                    adapter2!!.submitData(viewLifecycleOwner.lifecycle, it)
                 }
-                adapter.addLoadStateListener { loadState ->
+                adapter!!.addLoadStateListener { loadState ->
                     binding.apply {
                         progressBar.isVisible = loadState.source.refresh is LoadState.Loading
                         upcomingmovieview.isVisible =
@@ -190,7 +136,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                         //not found
                         if (loadState.source.refresh is LoadState.NotLoading &&
                             loadState.append.endOfPaginationReached &&
-                            adapter.itemCount < 1
+                            adapter!!.itemCount < 1
                         ) {
                             upcomingmovieview.isVisible = false
                             /* tvNotFound.isVisible = true*/
@@ -200,7 +146,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                     }
                 }
 
-                adapter1.addLoadStateListener { loadState ->
+                adapter1!!.addLoadStateListener { loadState ->
                     binding.apply {
                         progressBar2.isVisible = loadState.source.refresh is LoadState.Loading
                         nowplayingview.isVisible = loadState.source.refresh is LoadState.NotLoading
@@ -210,7 +156,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                         //not found
                         if (loadState.source.refresh is LoadState.NotLoading &&
                             loadState.append.endOfPaginationReached &&
-                            adapter.itemCount < 1
+                            adapter!!.itemCount < 1
                         ) {
                             nowplayingview.isVisible = false
                             /* tvNotFound.isVisible = true*/
@@ -220,7 +166,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                     }
                 }
 
-                adapter2.addLoadStateListener { loadState ->
+                adapter2!!.addLoadStateListener { loadState ->
                     binding.apply {
                         progressBar1.isVisible = loadState.source.refresh is LoadState.Loading
                         popularMovieView.isVisible =
@@ -231,7 +177,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                         //not found
                         if (loadState.source.refresh is LoadState.NotLoading &&
                             loadState.append.endOfPaginationReached &&
-                            adapter.itemCount < 1
+                            adapter!!.itemCount < 1
                         ) {
                             popularMovieView.isVisible = false
                             /* tvNotFound.isVisible = true*/
@@ -242,7 +188,7 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
                 }
 
             } else {
-                myview.visibility = View.INVISIBLE
+                //myview.visibility = View.INVISIBLE
                 val snackBar = Snackbar.make(
                     view, "Not Connected...",
                     Snackbar.LENGTH_LONG
@@ -347,31 +293,15 @@ class MovieHome : Fragment(R.layout.movie_home_fragment), UpcomingMovieAdapter.O
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu,inflater)
-
-        inflater.inflate(R.menu.main_menu, menu)
-        //val switchAB = menu?.findItem(R.id.switchId)
-
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.switchId->{
-                switchAB.setOnCheckedChangeListener { _, isChecked ->
-                    if (isChecked) {
-                        Toast.makeText(context, "on", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(context, "off", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                return true
-            }
-
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+        nowplayingview.adapter=null
+        upcomingmovieview.adapter=null
+        popularMovieView.adapter=null
+        adapter=null
+        adapter1=null
+        adapter2=null
 
     }
 

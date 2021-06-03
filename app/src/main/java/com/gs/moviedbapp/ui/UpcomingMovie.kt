@@ -17,38 +17,41 @@ import com.gs.moviedbapp.adapter.UpcomingMovieAdapter
 import com.gs.moviedbapp.databinding.FragmentUpcomingMovieBinding
 import com.gs.moviedbapp.model.UpcomingMovieResult
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_now_playing_movie.*
+import kotlinx.android.synthetic.main.fragment_upcoming_movie.*
 
 // TODO: Rename parameter arguments, choose names that match
 @AndroidEntryPoint
 class UpcomingMovie : Fragment(R.layout.fragment_upcoming_movie) , UpcomingMovieAdapter.OnItemClickListener{
 
     private val viewModel by viewModels<MoviesViewModel>()
-    private lateinit var _binding:FragmentUpcomingMovieBinding
+    private  var _binding:FragmentUpcomingMovieBinding?=null
     private val binding get() = _binding!!
+    private  var adapter: UpcomingMovieAdapter?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentUpcomingMovieBinding.bind(view)
 
-        val adapter = UpcomingMovieAdapter(this)
+         adapter = UpcomingMovieAdapter(this)
 
         binding.apply {
             upcoming.setHasFixedSize(true)
-            upcoming.adapter = adapter.withLoadStateHeaderAndFooter(
-                header = MovieLoadStateAdapter {adapter.retry()},
-                footer = MovieLoadStateAdapter {adapter.retry()}
+            upcoming.adapter = adapter!!.withLoadStateHeaderAndFooter(
+                header = MovieLoadStateAdapter {adapter!!.retry()},
+                footer = MovieLoadStateAdapter {adapter!!.retry()}
             )
             btnTryAgain.setOnClickListener {
-                adapter.retry()
+                adapter!!.retry()
             }
         }
 
         viewModel.upcomingmovies.observe(viewLifecycleOwner){
-            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+            adapter!!.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        adapter.addLoadStateListener { loadState ->
+        adapter!!.addLoadStateListener { loadState ->
             binding.apply {
                 progressBar.isVisible = loadState.source.refresh is LoadState.Loading
                 upcoming.isVisible = loadState.source.refresh is LoadState.NotLoading
@@ -58,7 +61,7 @@ class UpcomingMovie : Fragment(R.layout.fragment_upcoming_movie) , UpcomingMovie
                 //not found
                 if (loadState.source.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
-                    adapter.itemCount < 1){
+                    adapter!!.itemCount < 1){
                     upcoming.isVisible = false
                     tvNotFound.isVisible = true
                 } else {
@@ -112,5 +115,11 @@ class UpcomingMovie : Fragment(R.layout.fragment_upcoming_movie) , UpcomingMovie
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+        upcoming.adapter=null
+        adapter=null
+    }
 
 }

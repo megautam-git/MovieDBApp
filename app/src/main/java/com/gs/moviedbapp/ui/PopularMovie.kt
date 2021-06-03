@@ -14,41 +14,45 @@ import androidx.paging.LoadState
 import com.gs.moviedbapp.R
 import com.gs.moviedbapp.adapter.MovieLoadStateAdapter
 import com.gs.moviedbapp.adapter.PopularMovieAdapter
+import com.gs.moviedbapp.adapter.UpcomingMovieAdapter
 import com.gs.moviedbapp.databinding.FragmentPopularMovieBinding
 import com.gs.moviedbapp.model.PopularResult
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_now_playing_movie.*
+import kotlinx.android.synthetic.main.fragment_popular_movie.*
 import kotlinx.android.synthetic.main.movie_home_fragment.*
 
 @AndroidEntryPoint
 class PopularMovie : Fragment(R.layout.fragment_popular_movie)  , PopularMovieAdapter.OnItemClickListener{
 
     private val viewModel by viewModels<MoviesViewModel>()
-    private lateinit var _binding: FragmentPopularMovieBinding
+    private  var _binding: FragmentPopularMovieBinding?=null
     private val binding get() = _binding!!
+    private  var adapter: PopularMovieAdapter?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentPopularMovieBinding.bind(view)
 
-        val adapter = PopularMovieAdapter(this)
+         adapter = PopularMovieAdapter(this)
 
         binding.apply {
             popular.setHasFixedSize(true)
-            popular.adapter = adapter.withLoadStateHeaderAndFooter(
-                header = MovieLoadStateAdapter {adapter.retry()},
-                footer = MovieLoadStateAdapter {adapter.retry()}
+            popular.adapter = adapter!!.withLoadStateHeaderAndFooter(
+                header = MovieLoadStateAdapter {adapter!!.retry()},
+                footer = MovieLoadStateAdapter {adapter!!.retry()}
             )
             btnTryAgain.setOnClickListener {
-                adapter.retry()
+                adapter!!.retry()
             }
         }
 
         viewModel.popularmovies.observe(viewLifecycleOwner){
-            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+            adapter!!.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        adapter.addLoadStateListener { loadState ->
+        adapter!!.addLoadStateListener { loadState ->
             binding.apply {
                 progressBar.isVisible = loadState.source.refresh is LoadState.Loading
                 popular.isVisible = loadState.source.refresh is LoadState.NotLoading
@@ -58,7 +62,7 @@ class PopularMovie : Fragment(R.layout.fragment_popular_movie)  , PopularMovieAd
                 //not found
                 if (loadState.source.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
-                    adapter.itemCount < 1){
+                    adapter!!.itemCount < 1){
                     popular.isVisible = false
                     tvNotFound.isVisible = true
                 } else {
@@ -113,5 +117,11 @@ class PopularMovie : Fragment(R.layout.fragment_popular_movie)  , PopularMovieAd
 
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+        popular.adapter=null
+        adapter=null
+    }
 
 }

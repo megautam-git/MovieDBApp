@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/movie_icn_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieDBApp">
-        <activity android:name=".ui.Welcome">
+        <activity android:name=".ui.Welcome"
+            android:theme="@style/My">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

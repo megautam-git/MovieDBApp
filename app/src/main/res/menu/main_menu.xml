@@ -5,10 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:Context="com.gs.moviedbapp.MainActivity"
     >
-        <item
-            android:id="@+id/switchId"
-            android:title=""
-            android:actionLayout="@layout/switch_layout"
-            app:showAsAction="always" />
+    <item
+        android:id="@+id/switchId"
+        android:title=""
+        android:actionLayout="@layout/switch_layout"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/night"
+        android:title=""
+        android:icon="@drawable/ic_night"
+        app:showAsAction="always" />
 
     </menu>
